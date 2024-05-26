@@ -1,7 +1,10 @@
 provider "aws" {
   region = "us-east-1"  # Cambia a tu región AWS deseada
 }
-
+resource "aws_key_pair" "deployer_key" {
+  key_name = "llaveTetris"
+  public_key = file("~/.ssh/llaveTetris.pub")
+}
 # Creación de la VPC
 resource "aws_vpc" "tetris_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -61,7 +64,7 @@ resource "aws_security_group" "tetris_sg" {
 
 # Instancia EC2 en la subnet privada
 resource "aws_instance" "tetris_instance" {
-  ami           = "ami-0c1a6b582b6b7a5b9"  # Ubuntu 22.04 AMI, cambia según tu región y AMI
+  ami           = "ami-0e001c9271cf7f3b9"  # Ubuntu 22.04 AMI, cambia según tu región y AMI
   instance_type = "t2.large"
   subnet_id     = aws_subnet.tetris_private_subnet.id
   key_name      = "llaveTetris"  # Cambia al nombre de tu llave pública en AWS
@@ -71,7 +74,7 @@ resource "aws_instance" "tetris_instance" {
   tags = {
     Name = "Tetris-Instance"
   }
-  user data
+  user_data     =<<-EOF
         #!/bin/bash
         sudo apt update
         sudo apt install docker-compose -y
@@ -79,6 +82,7 @@ resource "aws_instance" "tetris_instance" {
         cd tetris/
         sudo docker build -t apptetris:v01 .
         sudo docker run -d -p 3000:3000 apptetris:v01 npm start
+        EOF
 }
 
 # Balanceador de Carga (Load Balancer)
