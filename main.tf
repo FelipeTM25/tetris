@@ -49,37 +49,6 @@ resource "aws_subnet" "tetris_private_subnet" {
    Name = "Tetris-Privada"
  }
 }
-# Tabla de enrutamiento privada
-resource "aws_route_table" "tetris_private_route_table" {
-  vpc_id = aws_vpc.tetris_vpc.id
-
-  tags = {
-    Name = "Tetris-Private-RT"
-  }
-}
-
-# Asociación de la tabla de enrutamiento privada con la subred privada
-resource "aws_route_table_association" "tetris_private_rt_association" {
-  subnet_id      = aws_subnet.tetris_private_subnet.id
-  route_table_id = aws_route_table.tetris_private_route_table.id
-}
-# Dirección IP elástica para la NAT Gateway
-resource "aws_eip" "tetris_nat_eip" {
-  tags = {
-    Name = "Tetris-NAT-EIP"
-  }
-}
-
-# NAT Gateway 
-resource "aws_nat_gateway" "tetris_nat_gw" {
-  allocation_id = aws_eip.tetris_nat_eip.id
-  subnet_id     = aws_subnet.tetris_public_subnet.id
-
-  tags = {
-    Name = "Tetris-NAT-Gateway"
-  }
-}
-
 
 # Security Group para la instancia EC2 en la subnet privada
 resource "aws_security_group" "tetris_sg" {
