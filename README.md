@@ -43,14 +43,18 @@ Navega al directorio donde se encuentra tu archivo de configuración de Terrafor
 
 Copiar código
 ### Inicializa los plugins y módulos de Terraform
+```bash
 terraform init
-
+```
 ### Revisa el plan de ejecución para la infraestructura
+```bash
 terraform plan
-
+```
 ### Aplica el plan para crear la infraestructura
+```bash
 terraform apply
+```
 
-###Ahora mira la dirección IP de la instancia en la cual esta corriendo el juego , ingresala a tu navegador de preferencia e ingresa a ella por el puerto :3000
+# Ahora mira la dirección IP de la instancia en la cual esta corriendo el juego , ingresala a tu navegador de preferencia e ingresa a ella por el puerto :3000
 ```
 
