@@ -31,12 +31,16 @@ Extrae el archivo y mueve el ejecutable a un directorio incluido en tu variable 
 Para que Terraform pueda interactuar con tu cuenta de AWS, necesitas configurar tus credenciales en el archivo ~/.aws/credentials.
 
 Crea el archivo si no existe y agrega tus credenciales de AWS:
-
-Copia las credenciales que aparencen en AWS DETAILS y selecciona AWS CLI
+```bash
+mkdir ~/.aws/
+nano credentials
+```
+Copia allí las credenciales que aparencen en AWS DETAILS y selecciona AWS CLI
+```bash
 [default]
 aws_access_key_id = TU_ACCESS_KEY_ID
 aws_secret_access_key = TU_SECRET_ACCESS_KEY
-
+```
 ### 4. Iniciar Terraform
 Navega al directorio donde se encuentra tu archivo de configuración de Terraform (normalmente main.tf) y sigue estos pasos:
 
