@@ -16,7 +16,7 @@ cd tetris
 ### 2. Instalar Terraform
 Terraform se puede instalar de dos maneras: usando comandos o descargándolo directamente desde la página oficial.
 
-# En Ubuntu
+### En Ubuntu
 ```bash
 sudo apt-get update
 sudo snap install terraform --classic
@@ -25,8 +25,8 @@ Otra forma:
 Instalación por Descarga Directa
 Ve a la página de descargas de Terraform.
 Descarga el paquete adecuado para tu sistema operativo.
-Extrae el archivo y mueve el ejecutable a un directorio incluido en tu variable PATH.
-```
+Extrae el archivo y mueve el ejecutable a un directorio incluido en tu variable PATH
+
 ### 3. Configurar Credenciales de AWS
 Para que Terraform pueda interactuar con tu cuenta de AWS, necesitas configurar tus credenciales en el archivo ~/.aws/credentials.
 
