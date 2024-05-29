@@ -1,4 +1,4 @@
-# Tetris App Deployment
+# Despliegue Juego Tetris
 
 Este repositorio contiene los archivos necesarios para desplegar una aplicación de Tetris en un contenedor Docker, y la infraestructura para desplegar esta aplicación automáticamente en AWS usando Terraform.
 
@@ -45,7 +45,6 @@ aws_secret_access_key = TU_SECRET_ACCESS_KEY
 Navega al directorio donde se encuentra tu archivo de configuración de Terraform (normalmente main.tf) y sigue estos pasos:
 
 
-Copiar código
 ### Inicializa los plugins y módulos de Terraform
 ```bash
 terraform init
@@ -58,7 +57,11 @@ terraform plan
 ```bash
 terraform apply
 ```
+### Durante el comando terraform apply, se te pedirá que confirmes la ejecución. Escribe yes y presiona Enter.
 
-# Ahora mira la dirección IP de la instancia en la cual esta corriendo el juego , ingresala a tu navegador de preferencia e ingresa a ella por el puerto :3000
+### 5. Acceder a la Aplicación de Tetris
+Una vez que la infraestructura esté desplegada y el contenedor Docker esté corriendo, obtén la dirección IP de la instancia donde está ejecutándose la aplicación. 
+Luego, abre tu navegador web preferido y accede a la aplicación utilizando la dirección IP y el puerto 3000 como se muestra a continuación:
+```bash
+http://<tu-dirección-ip>:3000
 ```
-
