@@ -51,5 +51,6 @@ terraform plan
 ### Aplica el plan para crear la infraestructura
 terraform apply
 
-#Ahora mira la dirección IP de la instancia en la cual esta corriendo el juego , ingresala a tu navegador de preferencia e ingresa a ella por el puerto :3000
+###Ahora mira la dirección IP de la instancia en la cual esta corriendo el juego , ingresala a tu navegador de preferencia e ingresa a ella por el puerto :3000
 ```
+
