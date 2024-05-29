@@ -11,7 +11,7 @@ Primero, clona este repositorio en tu máquina local usando Git.
 
 ```bash
 git clone https://github.com/FelipeTM25/tetris.git
-cd tetris
+cd tetris/
 ```
 ### 2. Instalar Terraform
 Terraform se puede instalar de dos maneras: usando comandos o descargándolo directamente desde la página oficial.
