@@ -40,15 +40,6 @@ resource "aws_route" "tetris_public_internet_route" {
  gateway_id             = aws_internet_gateway.tetris_igw.id
 }
 
-# Subnet Privada
-resource "aws_subnet" "tetris_private_subnet" {
- vpc_id            = aws_vpc.tetris_vpc.id
- cidr_block        = "20.0.2.0/24"
- availability_zone = "us-east-1b"
- tags = {
-   Name = "Tetris-Privada"
- }
-}
 
 # Security Group para la instancia EC2 en la subnet privada
 resource "aws_security_group" "tetris_sg" {
@@ -86,11 +77,11 @@ resource "aws_security_group" "tetris_sg" {
  }
 }
 
-# Instancia EC2 en la subnet privada
+# Instancia EC2 en la subnet publica
 resource "aws_instance" "tetris_instance" {
  ami           = "ami-0e001c9271cf7f3b9"  # Ubuntu 22.04 AMI
  instance_type = "t2.large"
- subnet_id     = aws_subnet.tetris_private_subnet.id
+ subnet_id     = aws_subnet.tetris_public_subnet.id
  key_name      = "llaveTetris"  # Cambia al nombre de tu llave pública en AWS
 
  security_groups = [aws_security_group.tetris_sg.id]
@@ -111,36 +102,5 @@ resource "aws_instance" "tetris_instance" {
         sudo docker build -t apptetris:v01 .
         sudo docker run -d -p 3000:3000 apptetris:v01 npm start
        EOF
-
- # Asociar IP pública, ya que la instancia estará en la subred privada
  associate_public_ip_address = true
-}
-
-# Crear un balanceador de cargas clásico en la misma VPC
-resource "aws_elb" "tetris_elb" {
- name            = "tetris-classic-load-balancer"
- subnets         = [aws_subnet.tetris_public_subnet.id, 
-                   aws_subnet.tetris_private_subnet.id]  # Ubicar en la subred pública
- security_groups = [aws_security_group.tetris_sg.id]  # Usar el mismo grupo de seguridad de la instancia
-
- listener {
-   instance_port     = 3000
-   instance_protocol = "HTTP"
-   lb_port           = 80
-   lb_protocol       = "HTTP"
- }
-
- instances = [aws_instance.tetris_instance.id]  
-
- health_check {
-   target              = "HTTP:3000/index.html" 
-   interval            = 30
-   timeout             = 5
-   unhealthy_threshold = 10
-   healthy_threshold   = 10
- }
-
- tags = {
-   Name = "Tetris-Load-Balancer"
- }
 }
