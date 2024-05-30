@@ -7,6 +7,18 @@ body {
     border: 1px solid black;
     padding: 20px;
   }
+#titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#titulo p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px;
+  color: #202020;
+  margin: 0;
+}
   #canvas {
     width: 200px;
     height: 440px;
